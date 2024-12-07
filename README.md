@@ -1,63 +1,45 @@
+
+
 # Qt_Radar_Program
 
-# Radar Chirp Signal and FM Modulation
+This program shows the relationship between range resolution and bandwidth in FMCW target detection. Narrower bandwidth makes it harder to distinguish close targets, while higher bandwidth improves accuracy.
 
-This repository demonstrates the relationship between **FM modulation** and **chirp signals**, and how radar systems utilize these concepts for range detection.
+The received signal is a delayed version of the transmitted signal:
 
-## 1. FM Modulation Basics
-In **Frequency Modulation (FM)**, the frequency of the carrier signal is modulated based on the message signal \( m(t) \). The FM signal is represented as:
+`r(t) = cos(2π(f_c * (t - τ) + (S * (t - τ)^2) / 2))`
 
-\[
-s(t) = A_c \cos\left(2\pi f_c t + 2\pi k_f \int m(\tau) d\tau \right)
-\]
+The mixing process involves multiplying the transmitted and received signals to produce the intermediate frequency (IF) signal:
 
-Where:
-- \( A_c \): Carrier amplitude,
-- \( f_c \): Carrier frequency,
-- \( k_f \): Frequency modulation coefficient (\( Hz/V \)),
-- \( m(t) \): Message signal.
+`m(t) = s(t) * r(t)`
 
-The **modulation index** (\( \beta \)) for FM is defined as:
 
-\[
-\beta = \frac{\Delta f}{f_m}
-\]
 
 Where:
-- \( \Delta f = k_f \cdot A_m \): Maximum frequency deviation,
-- \( f_m \): Maximum frequency of the message signal,
-- \( A_m \): Maximum amplitude of the message signal.
+- `f_c` is the carrier frequency,
+- `S` is the chirp slope, and
+- `τ = 2R / c` is the round-trip delay.
 
----
+### Formulas used in code
 
-## 2. Chirp Signal for Radar
-In radar systems, a **chirp signal** is a special case of FM modulation where the message signal is linear in time, \( m(t) = t \). The resulting chirp signal is:
+1. **Range Resolution**  
+   `ΔR = c / (2 * B)`
 
-\[
-s(t) = A_c \cos\left(2\pi f_c t + \pi S t^2 \right)
-\]
+2. **Chirp Signal**  
+   `s(t) = cos(2π(f_c * t + (S * t^2) / 2))`
 
-Where:
-- \( S = \frac{\Delta f}{T_{\text{chirp}}} \): Chirp slope (frequency change rate),
-- \( T_{\text{chirp}} \): Duration of the chirp signal,
-- \( \Delta f \): Total frequency bandwidth of the chirp.
+3. **Received Signal**  
+   `r(t) = cos(2π(f_c * (t - τ) + (S * (t - τ)^2) / 2))`
 
----
+4. **Mixing Process**  
+   `m(t) = s(t) * r(t)`
 
-## 3. Key Differences Between FM and Chirp
-| Concept            | FM Modulation                                    | Chirp Signal                                  |
-|--------------------|--------------------------------------------------|----------------------------------------------|
-| Frequency Control  | Depends on message amplitude (\( A_m \))         | Depends on time (\( t \))                    |
-| Frequency Deviation| \( \Delta f = k_f \cdot A_m \)                   | \( \Delta f = S \cdot T_{\text{chirp}} \)    |
-| Slope (\( S \))    | Not explicitly used                              | \( S = \frac{\Delta f}{T_{\text{chirp}}} \)  |
+5. **Round-Trip Delay**  
+   `τ = 2R / c`
 
----
+6. **FFT for Range Detection**  
+   `R = (c * f) / (2 * S)`
 
-## 4. Practical Applications
-- **FM Modulation** is widely used in telecommunications (e.g., FM radio).
-- **Chirp Signals** are specifically used in radar systems for range detection and resolution improvement.
 
-For further details, check out the MATLAB and Python implementations in this repository!
 
 
 
