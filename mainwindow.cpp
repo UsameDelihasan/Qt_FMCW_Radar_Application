@@ -116,7 +116,7 @@ void MainWindow::processAndDisplayData(QCustomPlot *customPlot, QSlider *slider,
         FFT_mix[i] = std::complex<double>(Mix[i], 0);
     }
 
-    // FFT hesaplamaları
+    // FFT calculations
     fftw_complex* in = reinterpret_cast<fftw_complex*>(FFT_mix.data());
     fftw_complex* out = reinterpret_cast<fftw_complex*>(FFT_mix.data());
 
@@ -148,7 +148,7 @@ void MainWindow::processAndDisplayData(QCustomPlot *customPlot, QSlider *slider,
     QVector<double> aa = {1, 2, 3, 4};
     QVector<double> b = {4, 5, 3, 2};
 
-    // Target1 verileri çizgi grafiği olarak ekler (mavi renk)
+    // Target1 
     ui->targetPlot1->addGraph();
     ui->targetPlot1->graph(0)->setData(t, Rx1);
     ui->targetPlot1->graph(0)->setPen(QPen(Qt::red));
@@ -159,13 +159,13 @@ void MainWindow::processAndDisplayData(QCustomPlot *customPlot, QSlider *slider,
     ui->targetPlot1->addGraph();
     ui->targetPlot1->graph(1)->setData(t, Tx1);
     ui->targetPlot1->graph(1)->setPen(QPen(Qt::blue));
-    ui->targetPlot1->xAxis->setRange(0, Range_max); // X ekseni aralığı
+    ui->targetPlot1->xAxis->setRange(0, Range_max); // X axis range
     ui->targetPlot1->yAxis->setRange(0, 1);
 
     ui->targetPlot1->rescaleAxes();
     ui->targetPlot1->replot();
 
-    // Target2 verileri çizgi grafiği olarak ekler (mavi renk)
+    // Target2 
     ui->targetPlot2->addGraph();
     ui->targetPlot2->graph(0)->setData(t, Rx2);
     ui->targetPlot2->graph(0)->setPen(QPen(Qt::red));
@@ -175,19 +175,19 @@ void MainWindow::processAndDisplayData(QCustomPlot *customPlot, QSlider *slider,
     ui->targetPlot2->addGraph();
     ui->targetPlot2->graph(1)->setData(t, Tx2);
     ui->targetPlot2->graph(1)->setPen(QPen(Qt::blue));
-    ui->targetPlot2->xAxis->setRange(0, Range_max); // X ekseni aralığı
+    ui->targetPlot2->xAxis->setRange(0, Range_max); 
     ui->targetPlot2->yAxis->setRange(0, 1);
 
     ui->targetPlot2->rescaleAxes();
     ui->targetPlot2->replot();
 
-    // mix verisi çizgi grafiği olarak ekler (mavi renk)
+    // mixPlot
     ui->mixPlot->addGraph();
     ui->mixPlot->graph(0)->setData(t, Mix);
     ui->mixPlot->graph(0)->setPen(QPen(Qt::darkGreen));
     ui->mixPlot->xAxis->setLabel("Time");
     ui->mixPlot->yAxis->setLabel("Amplitude");
-    ui->mixPlot->xAxis->setRange(0, Range_max); // X ekseni aralığı
+    ui->mixPlot->xAxis->setRange(0, Range_max); 
     ui->mixPlot->yAxis->setRange(0, 1);
 
     ui->mixPlot->rescaleAxes();
@@ -195,14 +195,13 @@ void MainWindow::processAndDisplayData(QCustomPlot *customPlot, QSlider *slider,
 
 
 
-    // FFT sonrası range grafiği
+    // range graph after FFT
     ui->plot2->addGraph();
     ui->plot2->graph(0)->setData(xData, yData);
     ui->plot2->xAxis->setLabel("Range (m)");
     ui->plot2->yAxis->setLabel("FFT Value");
-    ui->plot2->xAxis->setRange(0, Range_max); // X ekseni aralığı
-    ui->plot2->yAxis->setRange(0, 1); // Y ekseni aralığı
-
+    ui->plot2->xAxis->setRange(0, Range_max); // X axis range
+    ui->plot2->yAxis->setRange(0, 1); // Y axis range
     ui->plot2->rescaleAxes();
     ui->plot2->replot();
 
