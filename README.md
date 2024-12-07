@@ -1,6 +1,7 @@
 
 
-# Qt_Radar_Program
+# Qt Radar Application
+
 
 This program shows the relationship between range resolution and bandwidth in FMCW target detection. Narrower bandwidth makes it harder to distinguish close targets, while higher bandwidth improves accuracy.
 
